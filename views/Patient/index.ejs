@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarva Swasth</title>
+</head>
+<body>
+    <h2>All Patients</h2>
+    <form method="GET" action = "/homepage/new">
+        <button>New Appointment</button>
+    </form>
+    <ul>
+        <% for (let name of allPatients) { %>
+            <li><a href=/homepage/<%=name._id%>><%= name.patientname%></li>
+ 
+        <%}%>
+    </ul>
+   
+</body>
+</html>
