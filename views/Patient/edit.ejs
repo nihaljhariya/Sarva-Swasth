@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarva-Swasth</title>
+</head>
+<body>
+    <h3>Edit patient</h3>
+    <form method="POST" action="/homepage/<%=patient.id%>?_method=PUT" >
+       <input name="Patient[patientname]" value="<%=patient.patientname%>" type="text"/> 
+       <br/>  <br/>
+       <input name="Patient[emailId]" value="<%=patient.emailId%>" type="text"/> 
+       <br/>  <br/>
+       <input name="Patient[mobile]" value="<%=patient.mobile%>" type="number"/> 
+       <br/>  <br/>
+       <input name="Patient[age]" value="<%=patient.age%>" type="number"/> 
+       <br/>  <br/>
+       <input name="Patient[Gender]" value="<%=patient.Gender%>" type="text"/> 
+       <br/>  <br/>
+      
+<button>Edit</button>
+
+    </form>
+    
+</body>
+</html>
