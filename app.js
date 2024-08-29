@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const Patient = require("./models/patient.js");
 const path = require("path");
+const methodOverride = require("method-override");
 
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/SIH";
@@ -21,6 +22,7 @@ async function main(){
 app.set("view engine" , "ejs");
 app.set("views" , path.join(__dirname,"views"));
 app.use(express.urlencoded({extended:true}));
+app.use(methodOverride("_method"));
 
 app.get("/" , (req,res)=>{
     res.send("Hii this is root");
@@ -54,13 +56,35 @@ app.get("/homepage/:id", async(req,res)=>{
 app.get("/pay" , (req,res)=>{
     res.render("Patient/PayDone.ejs");
 });
-
+ 
 
 //Addint new appointment to data base
 app.post("/homepage" , async(req,res)=>{
      const newPatient = new Patient(req.body.Patient);
     await newPatient.save();
     res.redirect("/pay");
+})
+// Edit Rout :
+app.get("/homepage/:id/edit" , async(req,res)=>{
+    let {id} = req.params;
+    const patient = await Patient.findById(id);
+    res.render("Patient/edit.ejs" , {patient})
+})
+
+// Update patient :
+app.put("/homepage/:id" , async (req,res)=>{
+    let { id }= req.params;
+    await Patient.findByIdAndUpdate(id, {...req.body.patient});
+    res.redirect(`/homepage/${id}`);
+})
+
+
+// Delete Patient:
+app.delete("/homepage/:id" , async(req,res)=>{
+    let { id }= req.params;
+    let DeletePatient = await Patient.findByIdAndDelete(id);
+    console.log(DeletePatient);
+    res.redirect("/homepage");
 })
 
 

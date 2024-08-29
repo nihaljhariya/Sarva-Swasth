@@ -7,15 +7,19 @@
 </head>
 <body>
     <h3>Patient Details</h3>
-   
+    
     <ul>
         <li><%= patient.patientname %></li>
         <li><%= patient.emailId %></li>
         <li><%= patient.mobile %></li>
         <li><%= patient.age %></li>
         <li><%= patient.Gender %></li>
-
     </ul>
-
+<br/>
+<a href="/homepage/<%=patient._id%>/edit">Edit Patient</a>
+<br/> <br/>
+<form method="POST" action="/homepage/<%=patient._id%>?_method=DELETE">
+    <button>Delete</button>
+</form>
 </body>
 </html>
